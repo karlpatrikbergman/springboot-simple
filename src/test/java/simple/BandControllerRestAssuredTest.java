@@ -14,6 +14,17 @@ public class BandControllerRestAssuredTest {
         RestAssuredMockMvc.standaloneSetup(new BandController());
     }
 
+    @Test
+    public void getFilteredBands() {
+        given().
+                log().all().
+                when().
+                get("/bands?filtered").
+                then().
+                log().all().
+                statusCode(200);
+    }
+
    @Test
 	public void getAllBands() {
         given().

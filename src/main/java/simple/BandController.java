@@ -22,6 +22,20 @@ DELETE  /bands:id        Delete the specified band
 @RequestMapping(value = "/bands")
 public class BandController {
 
+    @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_UTF8_VALUE, params={"filtered"})
+    public List<Band> getAllBandsFiltered() {
+        return Arrays.asList(
+                Band.builder()
+                        .name("Saxon-filtered")
+                        .description("Saxon are an English heavy metal band formed in 1976, in South Yorkshire-filtered")
+                        .build(),
+                Band.builder()
+                        .name("Judas Priest-filtered")
+                        .description("Judas Priest is a British heavy metal band formed in Birmingham, England, in 1970-filtered")
+                        .build()
+        );
+    }
+
     @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Band> getAllBands() {
         return Arrays.asList(

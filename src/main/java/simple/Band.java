@@ -1,11 +1,22 @@
 package simple;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Builder
+@ToString
+@EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Band {
+    String name;
+    String description;
+}
+
+//Without Lombok
+/*
 @Builder
 @Value
 @EqualsAndHashCode
@@ -20,3 +31,4 @@ public class Band {
         this.description = description;
     }
 }
+*/
