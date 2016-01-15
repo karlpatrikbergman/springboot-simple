@@ -15,15 +15,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Mimics a database/storage
  */
 @Repository
-public enum BandRepository {
-    INSTANCE;
+public class BandRepository {
 
     private final Map<Integer, BandEntity> bands;
     private final AtomicInteger idCounter;
 
-    BandRepository() {
+    public BandRepository() {
         idCounter = new AtomicInteger(0);
         bands = new ConcurrentHashMap<>();
+        addBands(MockBandFactory.INSTANCE.mockSomeEightiesHeavyMetalBands());
     }
 
     public BandEntity createBand(BandEntityTO bandEntityTO) {

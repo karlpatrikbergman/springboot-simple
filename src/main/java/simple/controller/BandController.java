@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import simple.repository.BandEntity;
 import simple.repository.BandEntityTO;
@@ -31,6 +32,7 @@ TODO:
 I don't want object input to create and update band to have id field!
 */
 
+@Validated
 @RestController
 @RequestMapping(value = "/bands", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BandController {

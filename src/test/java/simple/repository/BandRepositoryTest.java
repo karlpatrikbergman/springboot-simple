@@ -11,11 +11,13 @@ import static org.junit.Assert.assertNotNull;
 
 public class BandRepositoryTest {
 
-    private final BandRepository repository = BandRepository.INSTANCE;
+    private BandRepository repository;
 
     @Before
     public void setup() {
-        repository.addBands(MockBandFactory.INSTANCE.mockSomeEightiesHeavyMetalBands());
+        repository = new BandRepository();
+        //temporary added to constructor of BandRepository
+        //repository.addBands(MockBandFactory.INSTANCE.mockSomeEightiesHeavyMetalBands());
     }
 
     //Create

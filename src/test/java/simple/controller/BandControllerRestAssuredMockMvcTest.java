@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import simple.repository.BandRepository;
-import simple.repository.MockBandFactory;
 import simple.service.BandService;
 
 import java.time.LocalDateTime;
@@ -23,8 +22,10 @@ public class BandControllerRestAssuredMockMvcTest {
 
     @Before
     public void setup() {
-        BandRepository.INSTANCE.addBands(MockBandFactory.INSTANCE.mockSomeEightiesHeavyMetalBands());
-        BandService bandService = new BandService(BandRepository.INSTANCE);
+        BandRepository bandRepository = new BandRepository();
+        //Tempoary added to constructor of BandRepository
+        //bandRepository.addBands(MockBandFactory.INSTANCE.mockSomeEightiesHeavyMetalBands());
+        BandService bandService = new BandService(bandRepository);
         RestAssuredMockMvc.standaloneSetup(new BandController(bandService));
     }
     @Test

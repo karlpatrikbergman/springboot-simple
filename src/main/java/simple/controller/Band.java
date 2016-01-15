@@ -3,6 +3,7 @@ package simple.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Band {
+public class Band implements Serializable {
+    private static final long serialVersionUID = 3358824117349512681L;
     @NonNull private Integer id;
     @NonNull private String name;
     @NonNull private String description;

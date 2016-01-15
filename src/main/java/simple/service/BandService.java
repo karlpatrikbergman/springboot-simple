@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class BandService {
 
-    private final BandRepository bandRepository;
+    private BandRepository bandRepository;
 
     @Autowired
     public BandService(BandRepository bandRepository) {
