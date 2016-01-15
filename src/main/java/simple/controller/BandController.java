@@ -12,9 +12,13 @@ import simple.repository.BandNotFoundException;
 import simple.service.BandService;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Min;
 import java.io.IOException;
+import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.List;
+import java.util.Set;
 
 /*
 GET     /bands           Read all bands
@@ -36,7 +40,7 @@ I don't want object input to create and update band to have id field!
 @RestController
 @RequestMapping(value = "/bands", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BandController {
-
+    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BandService bandService;
 
     @Autowired
@@ -104,6 +108,25 @@ public class BandController {
     @ExceptionHandler(BandNotFoundException.class)
     void handleBandNotFoundFound(HttpServletResponse response, BandNotFoundException exception) throws IOException {
         response.sendError(HttpStatus.FORBIDDEN.value(), exception.getMessage());
+    }
+
+    @ExceptionHandler(UnsupportedTemporalTypeException.class)
+    void handleWrongDateFormat(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.BAD_REQUEST.value(), "Date request parameters must have format " + DATETIME_FORMAT);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    void handleValidationError(HttpServletResponse response, ConstraintViolationException e) throws IOException {
+        response.sendError(HttpStatus.BAD_REQUEST.value(), getConstraintValidationErrorMessage(e));
+    }
+
+    private String getConstraintValidationErrorMessage(ConstraintViolationException e) {
+        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+        StringBuilder strBuilder = new StringBuilder();
+        for (ConstraintViolation<?> violation : violations ) {
+            strBuilder.append(violation.getMessage()).append(System.getProperty("line.separator"));
+        }
+        return strBuilder.toString();
     }
 
     /**
