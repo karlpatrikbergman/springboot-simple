@@ -39,6 +39,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     compile("org.projectlombok:lombok:1.16.6")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.0")
+    compile('org.apache.commons:commons-lang3:3.4')
     testCompile("org.codehaus.jackson:jackson-mapper-asl:1.9.0")
     testCompile("se.patrikbergman.java:java-utilities:1.0-SNAPSHOT")
     testCompile("org.springframework.boot:spring-boot-starter-test")
