@@ -16,8 +16,8 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-spring-boot'
-    version =  '0.1.0'
+    baseName = 'springboot-simple'
+    version =  '1.0-SNAPSHOT'
 }
 
 repositories {
@@ -52,5 +52,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    gradleVersion = '2.10'
 }
